@@ -13,5 +13,5 @@ FROM mcr.microsoft.com/dotnet/aspnet:7.0
 EXPOSE 80
 WORKDIR /App
 COPY --from=build-env /App/out .
-ENV ASPNETCORE_URLS=http://+:5066
+ENV ASPNETCORE_URLS=http://0.0.0.0:5066
 ENTRYPOINT ["dotnet", "proxy-tester.dll"]
