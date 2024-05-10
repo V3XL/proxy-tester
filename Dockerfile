@@ -10,8 +10,8 @@ RUN dotnet publish -c Release -o out
 
 # Build runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:7.0
-EXPOSE 80
 WORKDIR /App
 COPY --from=build-env /App/out .
-ENV ASPNETCORE_URLS=http://0.0.0.0:5066
+EXPOSE 80
+ENV ASPNETCORE_URLS=http://*:80
 ENTRYPOINT ["dotnet", "proxy-tester.dll"]
