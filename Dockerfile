@@ -1,13 +1,12 @@
 # Build
-FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:7.0
 WORKDIR /app
-COPY . .
+# copy csproj and restore as distinct layers
+COPY *.csproj ./
 RUN dotnet restore
-RUN dotnet publish -c Release -o out
 
-# Run
-FROM mcr.microsoft.com/dotnet/aspnet:7.0
-WORKDIR /app
-COPY --from=build /app/out .
+# copy and build everything else
+COPY . ./
+RUN dotnet publish -c Release -o out
 ENV ASPNETCORE_URLS=http://*:80
-CMD dotnet App.dll
+ENTRYPOINT ["dotnet", "out/proxy-tester.dll"]
