@@ -27,4 +27,4 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: Build the Docker image
-      run: docker build . -t V3XL/proxy-tester:latest      
+      run: docker build . -t v3xl/proxy-tester:latest      
