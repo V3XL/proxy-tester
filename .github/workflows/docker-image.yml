@@ -25,4 +25,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/proxy-tester:latest
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/proxy-tester:latest
