@@ -39,4 +39,4 @@ app.MapGet("/http", (string host, string port) =>
     TestProxy(host, port, "http")
 );
 
-app.Run("http://*:80");
+app.Run();
