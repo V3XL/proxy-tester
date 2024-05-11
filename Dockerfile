@@ -1,6 +1,6 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
 WORKDIR /App
-
+EXPOSE 8080/tcp
 # Copy everything
 COPY . ./
 # Restore as distinct layers
@@ -15,4 +15,4 @@ COPY --from=build-env /App/out .
 
 ENV ASPNETCORE_URLS http://*:8080
 ENTRYPOINT ["dotnet", "proxy-tester.dll"]
-EXPOSE 8080/tcp
+
