@@ -12,7 +12,7 @@ RUN dotnet publish -c Release -o out
 FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS runtime
 WORKDIR /App
 COPY --from=build-env /App/out .
-EXPOSE 8080/tcp
+
 ENV ASPNETCORE_URLS http://*:8080
 ENTRYPOINT ["dotnet", "proxy-tester.dll"]
-
+EXPOSE 8080/tcp
