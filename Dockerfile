@@ -13,5 +13,5 @@ FROM mcr.microsoft.com/dotnet/aspnet:7.0-alpine AS runtime
 WORKDIR /App
 COPY --from=build-env /App/out .
 
-ENTRYPOINT ["dotnet", "proxy-tester.dll", "--server.urls", "http://+:5000"]
+ENTRYPOINT ["dotnet", "proxy-tester.dll"]
 
