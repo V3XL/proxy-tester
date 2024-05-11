@@ -14,5 +14,5 @@ WORKDIR /App
 COPY --from=build-env /App/out .
 
 ENV ASPNETCORE_URLS http://*:5097
-ENTRYPOINT ["dotnet", "proxy-tester.dll"]
+ENTRYPOINT ["dotnet", "proxy-tester.dll", "--server.urls", "https://+:5097"]
 
