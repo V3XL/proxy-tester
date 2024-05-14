@@ -2,6 +2,8 @@
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /app
 
+ENV DOTNET_URLS=http://+:8080
+
 # Copy the project file and restore any dependencies (use .csproj for the project name)
 COPY *.csproj ./
 RUN dotnet restore
@@ -21,4 +23,4 @@ COPY --from=build /app/out ./
 EXPOSE 80
 
 # Start the application
-ENTRYPOINT ["dotnet", "proxy-tester.dll", "--server.urls", "http://*:80"]
+ENTRYPOINT ["dotnet", "proxy-tester.dll"]
