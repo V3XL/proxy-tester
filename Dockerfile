@@ -21,4 +21,4 @@ COPY --from=build /app/out ./
 EXPOSE 80
 
 # Start the application
-ENTRYPOINT ["dotnet", "proxy-tester.dll"]
+ENTRYPOINT ["dotnet", "proxy-tester.dll", "--server.urls", "https://+:80"]
