@@ -11,9 +11,11 @@ string TestProxy(string host, string port, string proxyType){
     client.Timeout = TimeSpan.FromSeconds(10);
     string content = null;
     try{
-        content = client.GetStringAsync("http://ipinfo.io/").Result;
+        if(client.GetStringAsync("http://ipinfo.io/").Result != null){
+            content = "{'status':'success'}";
+        }
     }catch (Exception){
-        content = "Error";
+        content = "{'status':'error'}";
     }
     return content;
 }
