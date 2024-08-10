@@ -54,9 +54,9 @@ JObject TestProxy(string host, string port, string proxyType)
         result.Add("responseTime", responseTime);
         
         if(isSuccess){
-            Trace.WriteLine($"[{host}:{port}] Type: {proxyType.ToUpper()} | Successful: {isSuccess} | ResponseTime: {responseTime}ms ");
+            Trace.WriteLine($"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] Proxy: {proxyType.ToLower()}://{host}:{port} | Successful: {isSuccess} | ResponseTime: {responseTime}ms");
         }else{
-            Trace.WriteLine($"[{host}:{port}] Type: {proxyType.ToUpper()} | Successful: {isSuccess}");
+            Trace.WriteLine($"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] Proxy: {proxyType.ToLower()}://{host}:{port} | Successful: {isSuccess}");
         }
         
 
