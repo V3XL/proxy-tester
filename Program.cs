@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Net;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
@@ -5,6 +6,14 @@ using Newtonsoft.Json.Linq;
 
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
+
+// Configure logging to filter out informational logs
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+
+builder.Logging.AddFilter("Microsoft.AspNetCore.Hosting.Diagnostics", LogLevel.Warning);
+builder.Logging.AddFilter("Microsoft.AspNetCore.Routing.EndpointMiddleware", LogLevel.Warning);
+builder.Logging.AddFilter("Microsoft.AspNetCore.Http.Result.ContentResult", LogLevel.Warning);
 
 JObject TestProxy(string host, string port, string proxyType)
 {
@@ -42,9 +51,9 @@ JObject TestProxy(string host, string port, string proxyType)
         result.Add("responseTime", responseTime);
         
         if(isSuccess){
-            Console.WriteLine($"[{host}:{port}] Type: {proxyType.ToUpper()} | Successful: {isSuccess} | ResponseTime: {responseTime}ms ");
+            Trace.WriteLine($"[{host}:{port}] Type: {proxyType.ToUpper()} | Successful: {isSuccess} | ResponseTime: {responseTime}ms ");
         }else{
-            Console.WriteLine($"[{host}:{port}] Type: {proxyType.ToUpper()} | Successful: {isSuccess}");
+            Trace.WriteLine($"[{host}:{port}] Type: {proxyType.ToUpper()} | Successful: {isSuccess}");
         }
         
 
