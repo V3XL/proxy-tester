@@ -13,6 +13,8 @@ builder.Logging.AddConsole();
 builder.Logging.AddFilter("Microsoft.AspNetCore.Hosting.Diagnostics", LogLevel.Warning);
 builder.Logging.AddFilter("Microsoft.AspNetCore.Routing.EndpointMiddleware", LogLevel.Warning);
 builder.Logging.AddFilter("Microsoft.AspNetCore.Http.Result.ContentResult", LogLevel.Warning);
+Trace.Listeners.Add(new TextWriterTraceListener(Console.Out));
+Trace.AutoFlush = true;
 
 var app = builder.Build();
 
