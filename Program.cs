@@ -5,15 +5,16 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
+
 
 // Configure logging to filter out informational logs
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
-
 builder.Logging.AddFilter("Microsoft.AspNetCore.Hosting.Diagnostics", LogLevel.Warning);
 builder.Logging.AddFilter("Microsoft.AspNetCore.Routing.EndpointMiddleware", LogLevel.Warning);
 builder.Logging.AddFilter("Microsoft.AspNetCore.Http.Result.ContentResult", LogLevel.Warning);
+
+var app = builder.Build();
 
 JObject TestProxy(string host, string port, string proxyType)
 {
