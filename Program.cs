@@ -77,12 +77,12 @@ app.MapGet("/", async context =>
 });
 
 app.MapGet("/socks", (string host, string port, string timeout) => {
-    string jsonResult = TestProxy(host, port, "socks").ToString(Formatting.None);
+    string jsonResult = TestProxy(host, port, "socks", timeout).ToString(Formatting.None);
     return Results.Text(jsonResult, "application/json"); 
 });
 
 app.MapGet("/http", (string host, string port, string timeout) => {
-    string jsonResult = TestProxy(host, port, "http").ToString(Formatting.None);
+    string jsonResult = TestProxy(host, port, "http", timeout).ToString(Formatting.None);
     return Results.Text(jsonResult, "application/json"); 
 });
 
