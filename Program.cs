@@ -27,7 +27,7 @@ JObject TestProxy(string host, string port, string proxyType, string timeout)
     })
     using (var client = new HttpClient(handler))
     {
-        client.Timeout = TimeSpan.FromMilliseconds(Int.Parse(timeout));
+        client.Timeout = TimeSpan.FromMilliseconds(int.Parse(timeout));
         string content = null;
         long responseTime = 0;
         bool isSuccess = false;
