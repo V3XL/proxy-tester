@@ -18,7 +18,7 @@ Trace.AutoFlush = true;
 
 var app = builder.Build();
 
-JObject TestProxy(string host, string port, string proxyType)
+JObject TestProxy(string host, string port, string proxyType, string timeout)
 {
     using (var handler = new SocketsHttpHandler
     {
@@ -27,7 +27,7 @@ JObject TestProxy(string host, string port, string proxyType)
     })
     using (var client = new HttpClient(handler))
     {
-        client.Timeout = TimeSpan.FromSeconds(10);
+        client.Timeout = TimeSpan.FromMilliseconds(Int.Parse(timeout));
         string content = null;
         long responseTime = 0;
         bool isSuccess = false;
@@ -76,12 +76,12 @@ app.MapGet("/", async context =>
     await context.Response.WriteAsync(response);
 });
 
-app.MapGet("/socks", (string host, string port) => {
+app.MapGet("/socks", (string host, string port, string timeout = 60000) => {
     string jsonResult = TestProxy(host, port, "socks").ToString(Formatting.None);
     return Results.Text(jsonResult, "application/json"); 
 });
 
-app.MapGet("/http", (string host, string port) => {
+app.MapGet("/http", (string host, string port, string timeout = 60000) => {
     string jsonResult = TestProxy(host, port, "http").ToString(Formatting.None);
     return Results.Text(jsonResult, "application/json"); 
 });
