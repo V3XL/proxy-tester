@@ -47,7 +47,9 @@ JObject TestProxy(string host, string port, string proxyType, string timeout)
             }
 
         }
-        catch (Exception){}
+        catch (Exception e){
+            Console.WriteLine(e);
+        }
 
         JObject result = new JObject();
         result.Add("successful", isSuccess);
