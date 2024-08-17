@@ -88,7 +88,7 @@ app.MapGet("/socks", async (HttpContext context) =>
     }
 
     var result = await TestProxyAsync(host, port, "socks", timeout);
-    return Results.Json(result, "application/json");
+    return Results.Json(result.ToString(), "application/json");
 });
 
 app.MapGet("/http", async (HttpContext context) =>
@@ -103,7 +103,7 @@ app.MapGet("/http", async (HttpContext context) =>
     }
 
     var result = await TestProxyAsync(host, port, "http", timeout);
-    return Results.Json(result, "application/json");
+    return Results.Json(result.ToString(), "application/json");
 });
 
 app.Urls.Add("http://*:80");
