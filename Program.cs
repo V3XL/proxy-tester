@@ -78,14 +78,34 @@ app.MapGet("/", async context =>
     await context.Response.WriteAsync(response);
 });
 
-app.MapGet("/socks", (string host, string port, string timeout) => {
-    string jsonResult = TestProxy(host, port, "socks", timeout).ToString(Formatting.None);
-    return Results.Text(jsonResult, "application/json"); 
+app.MapGet("/socks", async (HttpContext context) =>
+{
+    var host = context.Request.Query["host"].ToString();
+    var port = context.Request.Query["port"].ToString();
+    var timeout = context.Request.Query["timeout"].ToString();
+    
+    if (string.IsNullOrEmpty(host) || string.IsNullOrEmpty(port) || string.IsNullOrEmpty(timeout))
+    {
+        return Results.BadRequest("Missing query parameters.");
+    }
+
+    var result = await TestProxyAsync(host, port, "socks", timeout);
+    return Results.Json(result, "application/json");
 });
 
-app.MapGet("/http", (string host, string port, string timeout) => {
-    string jsonResult = TestProxy(host, port, "http", timeout).ToString(Formatting.None);
-    return Results.Text(jsonResult, "application/json"); 
+app.MapGet("/http", async (HttpContext context) =>
+{
+    var host = context.Request.Query["host"].ToString();
+    var port = context.Request.Query["port"].ToString();
+    var timeout = context.Request.Query["timeout"].ToString();
+    
+    if (string.IsNullOrEmpty(host) || string.IsNullOrEmpty(port) || string.IsNullOrEmpty(timeout))
+    {
+        return Results.BadRequest("Missing query parameters.");
+    }
+
+    var result = await TestProxyAsync(host, port, "http", timeout);
+    return Results.Json(result, "application/json");
 });
 
 app.Urls.Add("http://*:80");
